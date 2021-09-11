@@ -1,6 +1,9 @@
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
+function loop(){
+    setTimeout(loopoff, 1500);
+}
 function loopoff() {
     document.querySelector('.animation').style.display = 'none'
 }
@@ -78,9 +81,9 @@ btn.addEventListener('click', () => {
             date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
             loopoff()
             opac.style.opacity = 0;
-            var my = setInterval(work, 50);
+            var my = setInterval(work,50);
             function work() {
-                    opac.style.opacity =parseFloat(opac.style.opacity)+.08;
+                    opac.style.opacity =parseFloat(opac.style.opacity)+.1;
                     if (opac.style.opacity == "1")
                     clearInterval(my);
             }

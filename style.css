@@ -68,7 +68,7 @@ body {
   background-image: url("PHOTO-dark\ and\ stormy\ cloudscape-istock-1125x534-Landscape.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:1600px;
   height: 80vh;
   background-color: black;
 }
@@ -146,9 +146,6 @@ input[type="submit"] {
   .display {
     width: min-content;
   }
-  body {
-    height: 99vh;
-  }
 }
 @media only screen and (max-width: 380px) {
   input[type="text"] {
@@ -163,10 +160,7 @@ input[type="submit"] {
     font-size: 13px;
   }
   .display {
-    width: 260px;
-  }
-  body {
-    height: 99vh;
+    width: 320px;
   }
 }
 @keyframes jump_1 {
