@@ -146,6 +146,9 @@ input[type="submit"] {
   .display {
     width: min-content;
   }
+  sub{
+    font-size:9.5px;
+  }
 }
 @media only screen and (max-width: 380px) {
   input[type="text"] {
