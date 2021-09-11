@@ -1,3 +1,12 @@
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+function loopoff() {
+    document.querySelector('.animation').style.display = 'none'
+}
+function loopon() {
+    document.querySelector('.animation').style.display = 'flex'
+}
 var btn = document.querySelector('.btn');
 var inputValue = document.querySelector('input');
 var namec = document.querySelector('.name');
@@ -12,14 +21,21 @@ var wind = document.querySelector(".wind")
 var humidity = document.querySelector(".humidity")
 var sunrise = document.querySelector(".sunrise");
 var sunset = document.querySelector(".sunset");
-var date = new Date();
+var date = document.querySelector('.date')
+var dateValue = new Date();
+
+date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
 inputValue.addEventListener('keyup', () => {
     if (inputValue.value.length == 0)
         btn.disabled = true;
     else
         btn.disabled = false;
 })
+
+var opac = document.querySelector('.display');
+
 btn.addEventListener('click', () => {
+    loopon();
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=06d0a7fcf71b3d545247811a0c62309c`)
         .then(response => response.json())
         .then(data => {
@@ -44,7 +60,6 @@ btn.addEventListener('click', () => {
             let windValue = "<b>Wind Speed: </b>" + data['wind']['speed'] + " Km/hr";
             let pressureValue = "<b>Pressure: </b>" + data['main']['pressure'] + " torr";
 
-
             img.setAttribute("src", `http://openweathermap.org/img/wn/${data['weather'][0]['icon']}@2x.png`);
 
             wind.innerHTML = windValue;
@@ -60,6 +75,15 @@ btn.addEventListener('click', () => {
             descc.innerHTML = descValue;
             document.querySelector('.prop').style.display = "block";
             console.log(data);
+            date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
+            loopoff()
+            opac.style.opacity = 0;
+            var my = setInterval(work, 50);
+            function work() {
+                    opac.style.opacity =parseFloat(opac.style.opacity)+.08;
+                    if (opac.style.opacity == "1")
+                    clearInterval(my);
+            }
         })
         .catch(err => {
             namec.innerHTML = "City is not present in the Database of Server!!";
@@ -73,49 +97,16 @@ btn.addEventListener('click', () => {
             min_temp.innerHTML = "";
             humidity.innerHTML = "";
             descc.innerHTML = "";
-            img.setAttribute("src","");
+            img.setAttribute("src", "");
             document.querySelector('.prop').style.display = "none";
+            date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
+            loopoff()
+            opac.style.opacity = 0;
+            var my = setInterval(work, 50);
+            function work() {
+                    opac.style.opacity =parseFloat(opac.style.opacity)+.08;
+                    if (opac.style.opacity == "1")
+                    clearInterval(my);
+            }
         })
-})
-
-// base: "stations"
-// clouds:
-// all: 100
-// cod: 200
-// coord:
-// lat: 26.65
-// lon: 74.0333
-// dt: 1631364672
-// id: 1263120
-
-
-// main:
-// feels_like: 304.15
-// grnd_level: 963
-// humidity: 80
-// pressure: 998
-// sea_level: 998
-// temp: 300.7
-// temp_max: 300.7
-// temp_min: 300.7
-// name: "Merta"
-// rain:
-// 1h: 0.89
-// sys:
-// country: "IN"
-// sunrise:321268
-// sunset:366017
-// timezone: 19800
-// visibility: 10000
-// weather: Array(1)
-// 0:
-// description: "light rain"
-// icon: "10d"
-// id: 500
-// main: "Rain"
-// length: 1
-// [[Prototype]]: Array(0)
-// wind:
-// deg: 60
-// gust: 6.92
-// speed: 3.81
+    })
