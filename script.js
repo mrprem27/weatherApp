@@ -52,7 +52,7 @@ btn.addEventListener('click', () => {
             let latValue = "<b>Latitude: </b>" + data['coord']['lat'] + " ";
             let lonValue = "<b>Longitude: </b>" + data['coord']['lon'];
 
-            let humidityValue = "<b>Humidity: </b>" + data['main']['humidity'] + " gm/ml";
+            let humidityValue = "<b>Humidity: </b>" + data['main']['humidity'] + " %";
 
             var date_temp1 = new Date(data['sys']['sunrise'] * 1000);
             var date_temp2 = new Date(data['sys']['sunset'] * 1000);
@@ -61,7 +61,7 @@ btn.addEventListener('click', () => {
 
 
             let windValue = "<b>Wind Speed: </b>" + data['wind']['speed'] + " Km/hr";
-            let pressureValue = "<b>Pressure: </b>" + data['main']['pressure'] + " torr";
+            let pressureValue = "<b>Pressure: </b>" + data['main']['pressure'] + " hPa";
 
             img.setAttribute("src", `http://openweathermap.org/img/wn/${data['weather'][0]['icon']}@2x.png`);
 
