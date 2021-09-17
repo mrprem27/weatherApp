@@ -121,9 +121,10 @@ btn.addEventListener('click', () => {
             nochange();
         })
 })
+navigator
 if (navigator.geolocation) {
     loopon();
-    navigator.geolocation.getCurrentPosition(position => {
+    navigator.geolocation.getCurrentPosition((position) => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=06d0a7fcf71b3d545247811a0c62309c`)
@@ -134,7 +135,6 @@ if (navigator.geolocation) {
             .catch(err => {
                 namec.innerHTML = "Hello viewer!!😀";
             });
-    });
+    }, (err) =>
+        namec.innerHTML = "Hello viewer!!😀");
 }
-else
-namec.innerHTML = "Hello viewer!!😀";
