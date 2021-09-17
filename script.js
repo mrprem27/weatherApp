@@ -136,3 +136,5 @@ if (navigator.geolocation) {
             });
     });
 }
+else
+namec.innerHTML = "Hello viewer!!😀";
