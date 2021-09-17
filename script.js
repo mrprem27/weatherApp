@@ -26,7 +26,6 @@ var sunrise = document.querySelector(".sunrise");
 var sunset = document.querySelector(".sunset");
 var date = document.querySelector('.date')
 var dateValue = new Date();
-var opac = document.querySelector('.display');
 
 date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
 inputValue.addEventListener('keyup', () => {
@@ -35,6 +34,9 @@ inputValue.addEventListener('keyup', () => {
     else
         btn.disabled = false;
 })
+
+var opac = document.querySelector('.display');
+
 function change(data) {
     let nameValue = data['name'] + "," + data['sys']['country'] + " " + (data['main']['temp'] - 273.5).toFixed(2) + " \u00B0C";
 
@@ -78,10 +80,11 @@ function change(data) {
     var my = setInterval(work, 50);
     function work() {
         opac.style.opacity = parseFloat(opac.style.opacity) + .1;
-        if (opac.style.opacity == "1")
+        if (parseFloat(opac.style.opacity) == 1)
             clearInterval(my);
     }
 }
+
 function nochange() {
     namec.innerHTML = "City is not present in the Database of Server!!";
     wind.innerHTML = "";
@@ -97,26 +100,27 @@ function nochange() {
     img.setAttribute("src", "");
     document.querySelector('.prop').style.display = "none";
     date.innerHTML = dateValue.getDate() + " " + monthNames[dateValue.getMonth()] + " " + dateValue.getFullYear();
-    loopoff();
+    loopoff()
     opac.style.opacity = 0;
     var my = setInterval(work, 50);
     function work() {
-        opac.style.opacity = parseFloat(opac.style.opacity) + .08;
-        if (opac.style.opacity == "1")
+        opac.style.opacity = parseFloat(opac.style.opacity) + .1;
+        if (parseFloat(opac.style.opacity) == 1.1)
             clearInterval(my);
     }
-    btn.addEventListener('click', () => {
-        loopon();
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=06d0a7fcf71b3d545247811a0c62309c`)
-            .then(response => response.json())
-            .then(data => {
-                change(data);
-            })
-            .catch(err => {
-                nochange();
-            });
-    });
 }
+
+btn.addEventListener('click', () => {
+    loopon();
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=06d0a7fcf71b3d545247811a0c62309c`)
+        .then(response => response.json())
+        .then(data => {
+            change(data);
+        })
+        .catch(err => {
+            nochange();
+        })
+})
 if (navigator.geolocation) {
     loopon();
     navigator.geolocation.getCurrentPosition(position => {
@@ -128,7 +132,6 @@ if (navigator.geolocation) {
                 change(data)
             })
             .catch(err => {
-                console.log(err);
                 namec.innerHTML = "Hello viewer!!😀";
             });
     });
