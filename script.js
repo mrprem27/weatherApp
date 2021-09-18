@@ -1,15 +1,17 @@
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-function loop() {
-    setTimeout(loopoff, 1500);
-}
+// function loop() {
+//     setTimeout(loopoff, 1500);
+// }
+
 function loopoff() {
     document.querySelector('.animation').style.display = 'none'
 }
 function loopon() {
     document.querySelector('.animation').style.display = 'flex'
 }
+loopon();
 var btn = document.querySelector('.btn');
 var inputValue = document.querySelector('input');
 var namec = document.querySelector('.name');
@@ -121,10 +123,10 @@ btn.addEventListener('click', () => {
             nochange();
         })
 })
-navigator
+
 if (navigator.geolocation) {
-    loopon();
     navigator.geolocation.getCurrentPosition((position) => {
+        loopon();
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=06d0a7fcf71b3d545247811a0c62309c`)
@@ -134,7 +136,9 @@ if (navigator.geolocation) {
             })
             .catch(err => {
                 namec.innerHTML = "Hello viewer!!😀";
+                loopoff();
             });
     }, (err) =>
         namec.innerHTML = "Hello viewer!!😀");
+    loopoff();
 }
