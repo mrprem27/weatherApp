@@ -139,7 +139,6 @@ if (navigator.geolocation) {
                 loopoff();
             });
     }, (err) =>
-        namec.innerHTML = "Hello viewer!!😀\n Turn on your GPS to know your Current Location's Weather Report";
-       );
+        namec.innerHTML = "Hello viewer!!😀\n Turn on your GPS to know your Current Location's Weather Report");
     loopoff();
 }
